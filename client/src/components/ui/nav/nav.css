@@ -1,0 +1,143 @@
+#navUi {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+  padding: 0px 2rem;
+  background-color: rgba(224, 239, 247, 0.6);
+  backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 1.5rem;
+  z-index: 1000;
+}
+
+.unauth-nav-item {
+  font-family: "SF Pro", sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  margin: 0 1rem;
+}
+
+#middle-nav {
+  width: 4rem;
+  height: 4rem;
+}
+
+#get-started {
+  font-family: "SF Pro", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  background: linear-gradient(135deg, #d4a564, #b78b4f);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#get-started:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #c8a165;
+  border: 1px solid #c8a165;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+#get-started:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  margin: 0.5rem 24px;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.auth-nav-item:hover,
+.auth-nav-item.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.auth-img {
+  width: auto;
+  height: 2rem;
+  margin-bottom: 4px;
+}
+
+.auth-p {
+  font-family: "SF Pro", sans-serif;
+  font-size: 0.75rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #navUi {
+    padding: 0 1rem;
+    width: calc(100% - 3rem);
+  }
+
+  .unauth-nav-item {
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  #get-started {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .auth-nav-item {
+    margin: 0.5rem 16px;
+  }
+
+  .auth-img {
+    height: 1.6rem;
+  }
+
+  .auth-p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  #navUi {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    width: 75%;
+  }
+  .unauth-nav-item,
+  .auth-nav-item {
+    margin: 0.25rem 0;
+    text-align: center;
+  }
+
+  #middle-nav {
+    display: none;
+  }
+
+  #get-started {
+    width: 50%;
+    padding: 10px;
+    margin-top: 0.5rem;
+  }
+}
