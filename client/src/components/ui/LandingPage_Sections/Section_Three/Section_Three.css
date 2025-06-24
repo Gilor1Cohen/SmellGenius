@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+.SectionThree {
+  font-family: "Poppins", sans-serif;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.SectionThree > h1 {
+  flex-basis: 100%;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 600;
+  color: #b78b4f;
+  letter-spacing: 0.5em;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.SectionThree .features-box {
+  flex: 0 1 clamp(250px, 30%, 300px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: clamp(2rem, 4vw, 3rem);
+  margin: clamp(1rem, 3vw, 2rem);
+}
+
+.SectionThree .features-box img {
+  width: clamp(3rem, 6vw, 4rem);
+  height: auto;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.SectionThree .features-box p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #222;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .SectionThree {
+    padding: clamp(3rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  .SectionThree > h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.3em;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .SectionThree .features-box {
+    flex: 0 1 100%;
+    max-width: 400px;
+    margin: clamp(1rem, 3vw, 1.5rem) 0;
+  }
+
+  .SectionThree .features-box img {
+    width: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  .SectionThree .features-box p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+  }
+}

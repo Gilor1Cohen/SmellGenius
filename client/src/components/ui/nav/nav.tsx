@@ -49,12 +49,12 @@ export default function NavUi() {
           <a href="#about" className="unauth-nav-item">
             About Us
           </a>
-          <a href="#how-it-works" className="unauth-nav-item">
-            How It Works
-          </a>
-          <img src={drop} id="middle-nav" />
           <a href="#features" className="unauth-nav-item">
             Features
+          </a>
+          <img src={drop} id="middle-nav" />
+          <a href="#how-it-works" className="unauth-nav-item">
+            How It Works
           </a>
           <GoldBtn
             text="Get Started"
