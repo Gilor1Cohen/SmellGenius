@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
+const connectDB = require("./data-access-layer/db");
+
 require("dotenv").config();
 
 const app = express();
@@ -16,16 +18,27 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/Auth", require("./controllers-layer/Auth-Controller"));
+
 app.use((req, res) => {
   res.status(404).send(`Route not found: ${req.originalUrl}`);
 });
 
-app
-  .listen(5174, () => {
-    console.log("Listening on 5174");
+connectDB()
+  .then(() => {
+    const server = app.listen(5174, () =>
+      console.log("Server listening on port 5174")
+    );
+    server.on("error", (err) => {
+      if (err.code === "EADDRINUSE") {
+        console.error("Error: Address in use");
+      } else {
+        console.error("Error: Unknown server error", err);
+      }
+      process.exit(1);
+    });
   })
-  .on("error", (err) => {
-    err.code === "EADDRINUSE"
-      ? console.log("Error: Address in use")
-      : console.log("Error: Unknown error");
+  .catch((err) => {
+    console.error("DB connection failed", err);
+    process.exit(1);
   });

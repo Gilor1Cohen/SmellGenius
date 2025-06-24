@@ -3,14 +3,18 @@ import home from "../../../images/Home.png";
 import shop from "../../../images/Shop.png";
 import profile from "../../../images/Profile.png";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import type { NavUiProps } from "../../../types/UI.types";
+import GoldBtn from "../goldBtn/goldBtn";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext";
 
 import "./nav.css";
 
-export default function NavUi({ auth }: NavUiProps) {
+export default function NavUi() {
   const { pathname } = useLocation();
+
+  const { auth } = useContext(UserContext);
 
   const hideNav: boolean =
     !auth && (pathname === "/SignUp" || pathname === "/LogIn");
@@ -18,6 +22,8 @@ export default function NavUi({ auth }: NavUiProps) {
   if (hideNav) return <></>;
 
   const navMaxWidth: string = auth ? "325px" : "600px";
+
+  const navigate = useNavigate();
 
   return (
     <nav id="navUi" style={{ maxWidth: navMaxWidth }}>
@@ -50,7 +56,13 @@ export default function NavUi({ auth }: NavUiProps) {
           <a href="#features" className="unauth-nav-item">
             Features
           </a>
-          <button id="get-started">Get Started</button>
+          <GoldBtn
+            text="Get Started"
+            type="button"
+            onClick={() => {
+              navigate("/SignUp");
+            }}
+          />
         </>
       )}
     </nav>

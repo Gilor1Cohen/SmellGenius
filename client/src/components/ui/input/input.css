@@ -1,0 +1,88 @@
+.inputBox {
+  position: relative;
+  margin: 1.75rem 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  color: #333333;
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.75rem;
+  background-image: linear-gradient(#ffffff, #ffffff),
+    radial-gradient(circle at top left, #d4af37, #f1c40f);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.03), 0 8px 16px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.inputBox input::placeholder {
+  color: #aaaaaa;
+  font-style: italic;
+}
+
+.inputBox input:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+.inputBox .error {
+  position: absolute;
+  bottom: -1.4rem;
+  left: 1rem;
+  font-size: 0.875rem;
+  color: #e74c3c;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .inputBox {
+    margin: 1.5rem 0;
+  }
+  .inputBox input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 0.6rem;
+  }
+  .inputBox input::placeholder {
+    font-size: 0.9rem;
+  }
+  .inputBox input:focus {
+    transform: translateY(-1px);
+  }
+  .inputBox .error {
+    bottom: -1.2rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .inputBox {
+    margin: 1.1rem 0;
+  }
+  .inputBox input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    border-radius: 0.7rem;
+  }
+  .inputBox input::placeholder {
+    font-size: 0.95rem;
+  }
+  .inputBox input:focus {
+    transform: translateY(-1.5px);
+  }
+  .inputBox .error {
+    bottom: -1.3rem;
+    left: 0.9rem;
+    font-size: 0.8rem;
+  }
+}
