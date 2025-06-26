@@ -1,27 +1,28 @@
 import { memo } from "react";
 import type { FormInputProps } from "../../../types/UI.types";
-
 import "./input.css";
 
-const FormInput = memo(function ({
+function FormInput<TFieldValues extends object>({
+  name,
+  register,
+  validation,
   type,
   placeholder,
-  register,
-  name,
   error,
-  validation,
-}: FormInputProps) {
+  defaultValue,
+}: FormInputProps<TFieldValues>) {
   return (
     <div className="inputBox">
       <input
-        id={name}
+        id={String(name)}
+        defaultValue={defaultValue}
         type={type}
         placeholder={placeholder}
         {...register(name, validation)}
       />
-      {error && <p className="error">{error.message}</p>}
+      {error && <p className="inputBox-error">{error.message}</p>}
     </div>
   );
-});
+}
 
-export default FormInput;
+export default memo(FormInput) as typeof FormInput;

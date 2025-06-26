@@ -1,10 +1,10 @@
 import type {
-  FieldError,
-  RegisterOptions,
   UseFormRegister,
+  RegisterOptions,
+  FieldError,
+  FieldValues,
+  Path,
 } from "react-hook-form";
-
-import type { AuthData } from "./Auth.types";
 
 export interface GoldBtnProps {
   text: string;
@@ -14,11 +14,29 @@ export interface GoldBtnProps {
   onClick?: () => void;
 }
 
-export interface FormInputProps {
-  name: keyof AuthData;
+export interface FormInputProps<TFieldValues extends FieldValues> {
+  name: Path<TFieldValues>;
   type: React.HTMLInputTypeAttribute;
   placeholder?: string;
-  register: UseFormRegister<AuthData>;
-  validation: RegisterOptions<AuthData, keyof AuthData>;
+  register: UseFormRegister<TFieldValues>;
+  validation?: RegisterOptions<TFieldValues, Path<TFieldValues>>;
   error?: FieldError;
+  defaultValue?: any;
+}
+
+export interface SelectGenderProps<TFieldValues extends FieldValues> {
+  name: Path<TFieldValues>;
+  register: UseFormRegister<TFieldValues>;
+  validation?: RegisterOptions<TFieldValues, Path<TFieldValues>>;
+  errors?: FieldError;
+}
+
+export interface EditProfileProps {
+  setEditUserDetail: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface EditPasswordProps {
+  setEditPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  editPasswordLoading: boolean;
+  setEditPasswordLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }

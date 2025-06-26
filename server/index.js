@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/Auth", require("./controllers-layer/Auth-Controller"));
+app.use("/Perfumes", require("./controllers-layer/Perfumes-Controller"));
 
 app.use((req, res) => {
   res.status(404).send(`Route not found: ${req.originalUrl}`);

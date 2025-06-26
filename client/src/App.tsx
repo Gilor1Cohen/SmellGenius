@@ -3,10 +3,10 @@ import NavUi from "./components/ui/nav/nav";
 import Guest from "./components/routing/guest";
 import Authorized from "./components/routing/authorized";
 import type { TokenRes } from "./types/Auth.types";
+import { UserContext } from "./contexts/UserContext";
 import axios from "axios";
 
 import "./App.css";
-import { UserContext } from "./contexts/UserContext";
 
 function App() {
   const { auth, setAuth, setUser } = useContext(UserContext);
@@ -18,8 +18,6 @@ function App() {
         { withCredentials: true }
       );
 
-      console.log(data.data?.user);
-
       if (data.data?.user.exp && data.data?.user.exp > Date.now() / 1000) {
         setAuth(true);
 
@@ -28,6 +26,8 @@ function App() {
           Name: data.data?.user.Name,
           YearOfBirth: data.data?.user.YearOfBirth,
           FavoritePerfumes: data.data?.user.FavoritePerfumes,
+          Gender: data.data?.user.Gender,
+          Email: data.data.user.Email,
         });
       } else {
         setAuth(false);

@@ -6,7 +6,7 @@ const userSchema = new Schema({
   Name: { type: String, required: true },
   YearOfBirth: { type: Number },
   Gender: { type: String, enum: ["Male", "Female", "Other"] },
-  FavoritePerfumes: [{ type: String }],
+  FavoritePerfumes: [{ type: String, default: [] }],
 });
 
 module.exports = model("users", userSchema);

@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 
 import Input from "../../ui/input/input";
 
-import "./AuthPage.css";
 import { useForm } from "react-hook-form";
 import type { AuthData, AuthRes } from "../../../types/Auth.types";
 import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
+import "./AuthPage.css";
+import SelectGender from "../../ui/SelectGender/SelectGender";
 
 export default function AuthPage() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function AuthPage() {
     reset,
   } = useForm<AuthData>({ mode: "all" });
 
-  async function onFormSubmit(data: any): Promise<void> {
+  async function onFormSubmit(data: AuthData): Promise<void> {
     setLoading(true);
     setError(null);
 
@@ -42,7 +43,15 @@ export default function AuthPage() {
         { withCredentials: true }
       );
       setAuth(true);
-      setUser(res.data.data);
+
+      setUser({
+        _id: res.data.data.data._id,
+        Name: res.data.data.data.Name,
+        YearOfBirth: res.data.data.data.YearOfBirth,
+        FavoritePerfumes: res.data.data.data.FavoritePerfumes,
+        Gender: res.data.data.data.Gender,
+        Email: res.data.data.data.Email,
+      });
       navigate("/");
     } catch (error: any) {
       setError(
@@ -132,31 +141,15 @@ export default function AuthPage() {
                 }}
                 error={errors.YearOfBirth}
               />
-              <div className="select">
-                <select
-                  id="gender-box"
-                  defaultValue=""
-                  {...register("Gender", { required: "Gender is required" })}
-                >
-                  <option id="gender-option" value="" hidden disabled>
-                    Select Gender
-                  </option>
-                  <option id="gender-option" value="Male">
-                    Male
-                  </option>
-                  <option id="gender-option" value="Female">
-                    Female
-                  </option>
-                  <option id="gender-option" value="Other">
-                    Other
-                  </option>
-                </select>
-                {errors.Gender && (
-                  <p id="error-gender" className="error">
-                    {errors.Gender.message}
-                  </p>
-                )}
-              </div>
+
+              <SelectGender
+                name="Gender"
+                register={register}
+                validation={{
+                  required: "Gender is required",
+                }}
+                errors={errors.Gender}
+              />
             </>
           )}
 

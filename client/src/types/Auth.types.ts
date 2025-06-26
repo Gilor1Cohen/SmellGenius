@@ -3,6 +3,8 @@ export interface User {
   Name: string;
   YearOfBirth: number | string;
   FavoritePerfumes: number;
+  Gender: string;
+  Email: string;
 }
 
 export interface UserContextType {
@@ -20,9 +22,13 @@ export interface AuthData {
   Gender?: "Male" | "Female" | "Other";
 }
 
-export interface AuthRes {
+export interface Auth {
   token: string;
   data: User;
+}
+
+export interface AuthRes {
+  data: Auth;
 }
 
 export interface TokenRes {
@@ -31,7 +37,28 @@ export interface TokenRes {
     Name: string;
     YearOfBirth: number;
     FavoritePerfumes: number;
+    Gender: string;
+    Email: string;
     iat: number;
     exp: number;
+  };
+}
+
+export interface UserEdit {
+  Name: string;
+  Email: string;
+  YearOfBirth: string | number;
+  Gender: string;
+}
+
+export interface editPasswordForm {
+  Password: string;
+  PasswordAgain: string;
+}
+
+
+export interface editPasswordRes {
+  data: {
+    message: string;
   };
 }

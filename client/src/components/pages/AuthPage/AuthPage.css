@@ -21,50 +21,6 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
-.select {
-  position: relative;
-  display: block;
-}
-
-#gender-box {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 2.5rem;
-  background-color: #f7f9fa;
-  border: none;
-  border-radius: 12px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-  font-size: 16px;
-  color: #263238;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='12' height='7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 7L0 0h12z' fill='%2390A4AE'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  transition: box-shadow 0.2s ease;
-}
-
-#gender-box:hover {
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-#gender-box:focus {
-  box-shadow: 0 0 0 2px rgba(199, 162, 109, 0.4),
-    inset 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-#gender-box option {
-  color: #263238;
-  background-color: #ffffff;
-}
-
-#gender-box option[disabled] {
-  color: #90a4ae;
-}
-
 .error {
   font-size: 0.875rem;
   color: #e74c3c;
@@ -167,11 +123,6 @@
   .auth-h {
     font-size: 30px;
     margin-bottom: 28px;
-  }
-
-  #gender-box {
-    font-size: 15px;
-    padding: 14px 16px;
   }
 
   .auth-page-text {

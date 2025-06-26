@@ -1,4 +1,10 @@
-const { findByEmail, createUser } = require("../data-access-layer/Auth-DAL");
+const {
+  findByEmail,
+  createUser,
+  checkEmailById,
+  UpdateUserById,
+  UpdatePasswordById,
+} = require("../data-access-layer/Auth-DAL");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -22,6 +28,8 @@ async function LogIn(Email, Password) {
         Name: isExists.Name,
         YearOfBirth: isExists.YearOfBirth,
         FavoritePerfumes: isExists.FavoritePerfumes.length,
+        Gender: isExists.Gender,
+        Email,
       },
       process.env.JWT_SECRET,
       {
@@ -36,6 +44,8 @@ async function LogIn(Email, Password) {
         Name: isExists.Name,
         YearOfBirth: isExists.YearOfBirth,
         FavoritePerfumes: isExists.FavoritePerfumes.length,
+        Gender: isExists.Gender,
+        Email,
       },
     };
   } catch (error) {
@@ -65,6 +75,8 @@ async function SignUp(Email, Password, Name, YearOfBirth, Gender) {
         Name: user.Name,
         YearOfBirth: user.YearOfBirth,
         FavoritePerfumes: user.FavoritePerfumes.length,
+        Gender,
+        Email,
       },
       process.env.JWT_SECRET,
       {
@@ -79,6 +91,8 @@ async function SignUp(Email, Password, Name, YearOfBirth, Gender) {
         Name: user.Name,
         YearOfBirth: user.YearOfBirth,
         FavoritePerfumes: user.FavoritePerfumes.length,
+        Gender,
+        Email,
       },
     };
   } catch (error) {
@@ -86,4 +100,57 @@ async function SignUp(Email, Password, Name, YearOfBirth, Gender) {
   }
 }
 
-module.exports = { LogIn, SignUp };
+async function UpdateUser(_id, Name, Email, YearOfBirth, Gender) {
+  try {
+    const checkEmail = await checkEmailById(_id, Email);
+
+    if (!checkEmail.status) {
+      throw new Error(checkEmail.message);
+    }
+
+    const data = await UpdateUserById(_id, Name, Email, YearOfBirth, Gender);
+
+    const token = jwt.sign(
+      {
+        _id: data._id,
+        Name: data.Name,
+        YearOfBirth: data.YearOfBirth,
+        FavoritePerfumes: data.FavoritePerfumes.length,
+        Gender: data.Gender,
+        Email: data.Email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30m",
+      }
+    );
+
+    return {
+      token,
+      data: {
+        _id: data._id,
+        Name: data.Name,
+        YearOfBirth: data.YearOfBirth,
+        FavoritePerfumes: data.FavoritePerfumes.length,
+        Gender: data.Gender,
+        Email: data.Email,
+      },
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function EditPassword(_id, NewPassword) {
+  try {
+    const hash = bcrypt.hashSync(NewPassword, 10);
+
+    const Edit = await UpdatePasswordById(_id, hash);
+
+    return Edit;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { LogIn, SignUp, UpdateUser, EditPassword };

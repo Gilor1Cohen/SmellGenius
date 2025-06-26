@@ -33,7 +33,7 @@
   transform: translateY(-2px);
 }
 
-.inputBox .error {
+.inputBox .inputBox-error {
   position: absolute;
   bottom: -1.4rem;
   left: 1rem;
@@ -58,7 +58,7 @@
   .inputBox input:focus {
     transform: translateY(-1px);
   }
-  .inputBox .error {
+  .inputBox .inputBox-error {
     bottom: -1.2rem;
     left: 0.75rem;
     font-size: 0.75rem;
@@ -80,7 +80,7 @@
   .inputBox input:focus {
     transform: translateY(-1.5px);
   }
-  .inputBox .error {
+  .inputBox .inputBox-error {
     bottom: -1.3rem;
     left: 0.9rem;
     font-size: 0.8rem;

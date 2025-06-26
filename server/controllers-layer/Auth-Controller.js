@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { LogIn, SignUp } = require("../business-logic-layer/Auth-BL");
+const {
+  LogIn,
+  SignUp,
+  UpdateUser,
+  EditPassword,
+} = require("../business-logic-layer/Auth-BL");
 const { verifyToken, attachTokenFromCookie } = require("../middlewares/Auth");
 
 router.post("/LogIn", async (req, res) => {
@@ -57,6 +62,69 @@ router.post("/SignUp", async (req, res) => {
 
 router.get("/GetToken", attachTokenFromCookie, verifyToken, (req, res) => {
   return res.status(200).json({ user: req.user });
+});
+
+router.patch(
+  "/UpdateUser",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const { _id, Name, Email, YearOfBirth, Gender } = req.body;
+
+      if (!_id || !Email || !Name || !YearOfBirth || !Gender) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
+      const data = await UpdateUser(_id, Name, Email, YearOfBirth, Gender);
+
+      res.cookie("token", data.token, {
+        httpOnly: true,
+        maxAge: 30 * 60 * 1000,
+      });
+
+      return res.status(200).json({
+        data,
+      });
+    } catch (error) {
+      res
+        .status(error.message?.includes("User with id") ? 400 : 500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.patch(
+  "/EditPassword",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const { _id, NewPassword } = req.body;
+
+      if (!_id || !NewPassword) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
+
+      const data = await EditPassword(_id, NewPassword);
+
+      return res.status(200).json({
+        data,
+      });
+    } catch (error) {
+      res
+        .status(error.message === "User not found" ? 400 : 500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post("/LogOut", attachTokenFromCookie, verifyToken, (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+  });
+
+  return res.status(200).json({ message: "OK" });
 });
 
 module.exports = router;
