@@ -1,4 +1,7 @@
-const { getLikes } = require("../data-access-layer/Perfumes-DAL");
+const {
+  getLikes,
+  getPerfumeByName,
+} = require("../data-access-layer/Perfumes-DAL");
 
 async function GetUserLikes(_id, amount) {
   try {
@@ -18,4 +21,13 @@ async function GetUserLikes(_id, amount) {
   }
 }
 
-module.exports = { GetUserLikes };
+async function SearchByName(name, limit, skip) {
+  try {
+    const data = await getPerfumeByName(name, limit, skip);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+module.exports = { GetUserLikes, SearchByName };

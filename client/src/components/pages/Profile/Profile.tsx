@@ -32,7 +32,7 @@ export default function Profile() {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const status = error.response.status;
-        if ([400, 500].includes(status)) return [];
+        if ([404, 400, 500].includes(status)) return [];
 
         if ([401, 403].includes(status)) {
           setAuth(false);

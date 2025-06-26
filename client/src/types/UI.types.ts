@@ -40,3 +40,10 @@ export interface EditPasswordProps {
   editPasswordLoading: boolean;
   setEditPasswordLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface PerfumeHomeItemProps {
+  Perfume: string;
+  Year: number;
+  Brand: string;
+  Country: string;
+}
