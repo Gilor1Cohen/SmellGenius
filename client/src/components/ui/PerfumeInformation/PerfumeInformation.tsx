@@ -108,20 +108,24 @@ export default function PerfumeInformation({
       <div className="similar-perfumes-section">
         <h3 className="similar-perfumes-title">Similar Perfumes</h3>
         <div className="similar-perfumes-list">
-          {data.SimilarPerfumes.map((p: Perfume, idx: number) => (
-            <Link
-              key={`${p.Perfume}-${idx}`}
-              className="perfume-card"
-              to={`/Perfumes/${p.Perfume.toLowerCase()
-                .trim()
-                .replace(/\s+/g, "-")}`}
-            >
-              <div className="perfume-card-content">
-                <h4 className="perfume-card-name">{p.Perfume}</h4>
-                <p className="perfume-card-year">{p.Year || "Year unknown"}</p>
-              </div>
-            </Link>
-          ))}
+          {data.SimilarPerfumes.map((p, idx) => {
+            if (!p) return null;
+            const slug = p.Perfume.toLowerCase().trim().replace(/\s+/g, "-");
+            return (
+              <Link
+                key={`${slug}-${idx}`}
+                className="perfume-card"
+                to={`/Perfumes/${slug}`}
+              >
+                <div className="perfume-card-content">
+                  <h4 className="perfume-card-name">{p.Perfume}</h4>
+                  <p className="perfume-card-year">
+                    {p.Year || "Year unknown"}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </article>
