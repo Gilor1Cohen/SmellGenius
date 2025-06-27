@@ -5,6 +5,7 @@ const { attachTokenFromCookie, verifyToken } = require("../middlewares/Auth");
 const {
   GetUserLikes,
   SearchByName,
+  GetPerfumeData,
 } = require("../business-logic-layer/Perfumes-BL");
 
 router.get(
@@ -42,6 +43,27 @@ router.get(
       const skip = req.query.skip;
 
       const data = await SearchByName(name, limit, skip);
+
+      return res.status(200).json({ data });
+    } catch (error) {
+      return res
+        .status(error.message === "No perfume found." ? 404 : 500)
+        .json({ message: error.message || "Error" });
+    }
+  }
+);
+
+router.get(
+  "/GetPerfumeData",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const name = req.query.perfumeName;
+      const id = req.user._id;
+      const YearOfBirth = req.user.YearOfBirth;
+
+      const data = await GetPerfumeData(name, id, YearOfBirth);
 
       return res.status(200).json({ data });
     } catch (error) {

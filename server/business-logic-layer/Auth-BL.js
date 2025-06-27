@@ -4,6 +4,8 @@ const {
   checkEmailById,
   UpdateUserById,
   UpdatePasswordById,
+  unLike,
+  like,
 } = require("../data-access-layer/Auth-DAL");
 
 const bcrypt = require("bcryptjs");
@@ -153,4 +155,41 @@ async function EditPassword(_id, NewPassword) {
   }
 }
 
-module.exports = { LogIn, SignUp, UpdateUser, EditPassword };
+async function LikePerfume(id, perfumeName, isLiked, Email) {
+  try {
+    isLiked ? await unLike(id, perfumeName) : await like(id, perfumeName);
+
+    const user = await findByEmail(Email);
+
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        Name: user.Name,
+        YearOfBirth: user.YearOfBirth,
+        FavoritePerfumes: user.FavoritePerfumes.length,
+        Gender: user.Gender,
+        Email: user.Email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30m",
+      }
+    );
+
+    return {
+      token,
+      data: {
+        _id: user._id,
+        Name: user.Name,
+        YearOfBirth: user.YearOfBirth,
+        FavoritePerfumes: user.FavoritePerfumes.length,
+        Gender: user.Gender,
+        Email: user.Email,
+      },
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { LogIn, SignUp, UpdateUser, EditPassword, LikePerfume };

@@ -7,6 +7,7 @@ export interface PerfumeForm {
 }
 
 export interface Perfume {
+  id?: string;
   url: string;
   Perfume: string;
   Brand: string;
@@ -29,4 +30,15 @@ export interface Perfume {
 
 export interface PerfumeFormRes {
   data: Perfume[];
+}
+
+export interface PerfumeInformationResData {
+  PerfumeData: Perfume[];
+  Like: boolean;
+  SameBrand: Perfume[];
+  SimilarPerfumes: Perfume[];
+}
+
+export interface PerfumeInformationRes {
+  data: PerfumeInformationResData;
 }

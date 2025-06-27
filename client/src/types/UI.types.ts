@@ -5,6 +5,7 @@ import type {
   FieldValues,
   Path,
 } from "react-hook-form";
+import type { PerfumeInformationResData } from "./Perfumes.types";
 
 export interface GoldBtnProps {
   text: string;
@@ -46,4 +47,11 @@ export interface PerfumeHomeItemProps {
   Year: number;
   Brand: string;
   Country: string;
+}
+
+export interface PerfumeInformationProps {
+  data: PerfumeInformationResData;
+  loading: boolean;
+  like: boolean;
+  onLike: (perfumeName: string) => Promise<void>;
 }

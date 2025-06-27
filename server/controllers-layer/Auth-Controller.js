@@ -5,7 +5,9 @@ const {
   SignUp,
   UpdateUser,
   EditPassword,
+  LikePerfume,
 } = require("../business-logic-layer/Auth-BL");
+
 const { verifyToken, attachTokenFromCookie } = require("../middlewares/Auth");
 
 router.post("/LogIn", async (req, res) => {
@@ -115,6 +117,33 @@ router.patch(
       res
         .status(error.message === "User not found" ? 400 : 500)
         .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post(
+  "/LikePerfume",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const { perfumeName, isLiked } = req.body;
+
+      const id = req.user._id;
+      const Email = req.user.Email;
+
+      const data = await LikePerfume(id, perfumeName, isLiked, Email);
+
+      res.cookie("token", data.token, {
+        httpOnly: true,
+        maxAge: 30 * 60 * 1000,
+      });
+
+      return res.status(200).json({
+        data,
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
     }
   }
 );

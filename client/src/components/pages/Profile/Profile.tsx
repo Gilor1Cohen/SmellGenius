@@ -7,6 +7,7 @@ import EditProfile from "../../ui/editProfile/editProfile";
 
 import "./Profile.css";
 import EditPassword from "../../ui/editPassword/editPassword";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const [editUserDetail, setEditUserDetail] = useState<boolean>(false);
@@ -125,9 +126,16 @@ export default function Profile() {
             perfumesData.length > 0 ? (
               <div id="perfumesBox">
                 {perfumesData.map((perfume: string) => (
-                  <p className="perfumesData-p" key={perfume}>
+                  <Link
+                    to={`/Perfumes/${perfume
+                      .toLowerCase()
+                      .trim()
+                      .replace(/\s+/g, "-")}`}
+                    className="perfumesData-p"
+                    key={perfume}
+                  >
                     {perfume}
-                  </p>
+                  </Link>
                 ))}
 
                 {perfumesData.length === 3 && (
@@ -146,8 +154,6 @@ export default function Profile() {
           ) : (
             <></>
           )}
-
-          <p className="gold Perfumes">Add Perfumes</p>
         </div>
 
         {editPassword && (

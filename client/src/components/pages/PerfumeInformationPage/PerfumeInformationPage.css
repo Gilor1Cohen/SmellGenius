@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;500&display=swap");
+
+#PerfumeInformationPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem;
+  background: linear-gradient(140deg, #f5e1a4 0%, #e0f7fa 100%);
+  box-shadow: 0 0 20px rgba(245, 225, 164, 0.4), 0 4px 30px rgba(0, 0, 0, 0.1);
+  font-family: "Playfair Display", serif;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.status {
+  text-align: center;
+  font-size: 1rem;
+  margin: 1.5rem 0;
+  color: #777;
+  font-style: italic;
+}
+
+.status.error {
+  color: #c0392b;
+}

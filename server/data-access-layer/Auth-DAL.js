@@ -3,7 +3,7 @@ const User = require("../models/Users.model");
 async function findByEmail(Email) {
   const user = await User.findOne(
     { Email },
-    "_id Name Password YearOfBirth FavoritePerfumes Gender"
+    "_id Name Password YearOfBirth FavoritePerfumes Gender Email"
   );
 
   return user;
@@ -82,10 +82,47 @@ async function UpdatePasswordById(_id, hash) {
   }
 }
 
+async function unLike(id, perfumeName) {
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new Error(`User with id ${id} not found`);
+  }
+
+  const index = user.FavoritePerfumes.indexOf(perfumeName);
+
+  if (index === -1) {
+    return user;
+  }
+
+  user.FavoritePerfumes.splice(index, 1);
+  await user.save();
+
+  return user;
+}
+
+async function like(id, perfumeName) {
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new Error(`User with id ${id} not found`);
+  }
+
+  const alreadyLiked = user.FavoritePerfumes.includes(perfumeName);
+  if (alreadyLiked) return user;
+
+  user.FavoritePerfumes.push(perfumeName);
+  await user.save();
+
+  return user;
+}
+
 module.exports = {
   findByEmail,
   createUser,
   checkEmailById,
   UpdateUserById,
   UpdatePasswordById,
+  unLike,
+  like,
 };

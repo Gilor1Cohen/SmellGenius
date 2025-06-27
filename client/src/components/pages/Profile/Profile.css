@@ -82,10 +82,6 @@
   width: 30px;
 }
 
-.Perfumes {
-  width: 125px;
-}
-
 .Password {
   height: auto;
   width: 175px;
@@ -126,6 +122,7 @@
 }
 
 .perfumesData-p {
+  text-decoration: none;
   margin: 0;
   padding: 15px;
   background: #ffffff;

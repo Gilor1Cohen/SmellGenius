@@ -12,7 +12,15 @@ export default function Home() {
     <section id="Home">
       <article id="blur">
         <h1>Hello {user?.Name}</h1>
-        <p>Ready to discover your next signature scent?</p>
+
+        {user?.FavoritePerfumes && user?.FavoritePerfumes > 0 ? (
+          <p>Ready to discover your next signature scent?</p>
+        ) : (
+          <p>
+            Browse our collection and add some favorites to get personalized
+            recommendations!
+          </p>
+        )}
 
         <div id="Boxes">
           <Link className="homeLink" to="/next-scent">
