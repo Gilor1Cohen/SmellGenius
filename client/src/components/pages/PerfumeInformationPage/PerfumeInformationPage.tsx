@@ -1,13 +1,19 @@
-import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
+
 import type {
   PerfumeInformationRes,
   PerfumeInformationResData,
 } from "../../../types/Perfumes.types";
+import type { likeRes } from "../../../types/Auth.types";
+
 import { UserContext } from "../../../contexts/UserContext";
 
 import PerfumeInformation from "../../ui/PerfumeInformation/PerfumeInformation";
+
 import "./PerfumeInformationPage.css";
 
 export default function PerfumeInformationPage() {
@@ -65,7 +71,7 @@ export default function PerfumeInformationPage() {
     setLikeLoading(true);
 
     try {
-      const like = await axios.post(
+      const like = await axios.post<likeRes>(
         "http://localhost:5174/Auth/LikePerfume",
         { perfumeName: perfumeName, isLiked: data?.Like },
         { withCredentials: true }
@@ -73,6 +79,17 @@ export default function PerfumeInformationPage() {
 
       if (like.status === 200) {
         setLike((prev) => !prev);
+
+        setAuth(true);
+
+        setUser({
+          _id: like.data.data.data._id,
+          Name: like.data.data.data.Name,
+          YearOfBirth: like.data.data.data.YearOfBirth,
+          FavoritePerfumes: like.data.data.data.FavoritePerfumes,
+          Gender: like.data.data.data.Gender,
+          Email: like.data.data.data.Email,
+        });
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

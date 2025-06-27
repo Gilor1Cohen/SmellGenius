@@ -56,9 +56,12 @@ export interface editPasswordForm {
   PasswordAgain: string;
 }
 
-
 export interface editPasswordRes {
   data: {
     message: string;
   };
+}
+
+export interface likeRes {
+  data: Auth;
 }
