@@ -28,6 +28,12 @@ export interface Perfume {
   mainaccord5: string;
 }
 
+export interface ShortPerfume {
+  Perfume: string;
+  Brand: string;
+  Year: string | null;
+}
+
 export interface PerfumeFormRes {
   data: Perfume[];
 }
@@ -35,8 +41,8 @@ export interface PerfumeFormRes {
 export interface PerfumeInformationResData {
   PerfumeData: Perfume[];
   Like: boolean;
-  SameBrand: Perfume[];
-  SimilarPerfumes: Perfume[];
+  SameBrand: ShortPerfume[];
+  SimilarPerfumes: ShortPerfume[];
 }
 
 export interface PerfumeInformationRes {

@@ -63,4 +63,65 @@ async function recommendTopPerfumes(UserLikes, SimilarPerfumes, YearOfBirth) {
   }
 }
 
-module.exports = { recommendTopPerfumes };
+async function recommendPerfumesForSituation(
+  situation,
+  YearOfBirth,
+  Gender,
+  UserLikes
+) {
+  try {
+    const userPrompt = `
+    You have this list of perfumes that the user already likes:
+    ${JSON.stringify(UserLikes)}.
+
+    Please select up to 3 perfumes from that list which best fit the following situation:
+      - Situation: "${situation}"
+      - User birth year: ${YearOfBirth}
+      - User gender: ${Gender}
+    `;
+
+    const functions = [
+      {
+        name: "filterUserLikes",
+        description:
+          "Selects perfumes from the user's likes that fit the situation",
+        parameters: {
+          type: "object",
+          properties: {
+            filteredPerfumes: {
+              type: "array",
+              description:
+                "Up to 3 perfume names, chosen from the user's likes, unchanged",
+              items: {
+                type: "string",
+                enum: UserLikes,
+              },
+              maxItems: 3,
+            },
+          },
+          required: ["filteredPerfumes"],
+        },
+      },
+    ];
+
+    const res = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "You are a perfume recommendation assistant.",
+        },
+        { role: "user", content: userPrompt },
+      ],
+      functions,
+    });
+
+    const args = JSON.parse(res.choices[0].message.function_call.arguments);
+
+    return args.filteredPerfumes;
+  } catch (error) {
+    return [];
+  }
+}
+
+module.exports = { recommendTopPerfumes, recommendPerfumesForSituation };

@@ -164,61 +164,6 @@
   gap: 3rem;
 }
 
-.perfume-card-link,
-.perfume-card {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  background-color: #ffffff;
-  border-radius: 2rem;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 20px 48px rgba(208, 174, 111, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  position: relative;
-}
-
-.perfume-card-link:hover,
-.perfume-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(208, 174, 111, 0.2);
-}
-
-.perfume-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 40px;
-  height: 2px;
-  background-color: #d0ae6f;
-  border-radius: 1px;
-  transform: translateX(-50%);
-  opacity: 0.7;
-  margin-top: 1rem;
-}
-
-.perfume-card-content {
-  padding-top: 1rem;
-}
-
-.perfume-card-name {
-  font-family: "Playfair Display", serif;
-  font-size: 1.35rem;
-  color: #d0ae6f;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-transform: capitalize;
-}
-
-.perfume-card-year {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.95rem;
-  color: rgba(208, 174, 111, 0.85);
-  letter-spacing: 0.2px;
-}
-
 @media (max-width: 1024px) {
   .perfume-meta {
     grid-template-columns: 1fr 1fr;
@@ -262,17 +207,5 @@
   .same-brand-title,
   .similar-perfumes-title {
     font-size: 1.75rem;
-  }
-
-  .perfume-card {
-    padding: 2rem 1rem;
-  }
-
-  .perfume-card-name {
-    font-size: 1.2rem;
-  }
-
-  .perfume-card-year {
-    font-size: 0.85rem;
   }
 }

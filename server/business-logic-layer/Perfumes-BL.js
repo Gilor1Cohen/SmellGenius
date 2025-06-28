@@ -5,7 +5,10 @@ const {
   findByAccordsAndNotes,
 } = require("../data-access-layer/Perfumes-DAL");
 
-const { recommendTopPerfumes } = require("../AI/Perfumes-AI");
+const {
+  recommendTopPerfumes,
+  recommendPerfumesForSituation,
+} = require("../AI/Perfumes-AI");
 
 async function GetUserLikes(_id, amount) {
   try {
@@ -75,4 +78,34 @@ async function GetPerfumeData(name, _id, YearOfBirth) {
     throw error;
   }
 }
-module.exports = { GetUserLikes, SearchByName, GetPerfumeData };
+
+async function GetBySituation(situation, id, YearOfBirth, Gender) {
+  try {
+    const UserLikes = await getLikes(id);
+
+    const AiData = await recommendPerfumesForSituation(
+      situation,
+      YearOfBirth,
+      Gender,
+      UserLikes.FavoritePerfumes
+    );
+
+    let PerfumesData = [];
+
+    for (const item of AiData) {
+      const data = await getPerfumeByName(item, 1, 0);
+
+      PerfumesData.push({
+        Perfume: data[0].Perfume,
+        Brand: data[0].Brand,
+        Year: data[0].Year ?? null,
+      });
+    }
+
+    return PerfumesData;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { GetUserLikes, SearchByName, GetPerfumeData, GetBySituation };

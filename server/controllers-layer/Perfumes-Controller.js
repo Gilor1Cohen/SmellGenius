@@ -6,6 +6,7 @@ const {
   GetUserLikes,
   SearchByName,
   GetPerfumeData,
+  GetBySituation,
 } = require("../business-logic-layer/Perfumes-BL");
 
 router.get(
@@ -60,10 +61,32 @@ router.get(
   async (req, res) => {
     try {
       const name = req.query.perfumeName;
-      const id = req.user._id;
+      const _id = req.user._id;
       const YearOfBirth = req.user.YearOfBirth;
 
-      const data = await GetPerfumeData(name, id, YearOfBirth);
+      const data = await GetPerfumeData(name, _id, YearOfBirth);
+
+      return res.status(200).json({ data });
+    } catch (error) {
+      return res
+        .status(error.message === "No perfume found." ? 404 : 500)
+        .json({ message: error.message || "Error" });
+    }
+  }
+);
+
+router.get(
+  "/GetBySituation",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const situation = req.query.situationName;
+      const _id = req.user._id;
+      const YearOfBirth = req.user.YearOfBirth;
+      const Gender = req.user.Gender;
+
+      const data = await GetBySituation(situation, _id, YearOfBirth, Gender);
 
       return res.status(200).json({ data });
     } catch (error) {

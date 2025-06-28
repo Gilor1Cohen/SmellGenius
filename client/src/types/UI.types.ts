@@ -5,7 +5,8 @@ import type {
   FieldValues,
   Path,
 } from "react-hook-form";
-import type { PerfumeInformationResData } from "./Perfumes.types";
+
+import type { PerfumeInformationResData, ShortPerfume } from "./Perfumes.types";
 
 export interface GoldBtnProps {
   text: string;
@@ -54,4 +55,15 @@ export interface PerfumeInformationProps {
   loading: boolean;
   like: boolean;
   onLike: (perfumeName: string) => Promise<void>;
+}
+
+export interface SituationCardProps {
+  text: string;
+  onClick: () => void;
+}
+
+export interface PerfumeCardProps {
+  p: ShortPerfume;
+  idx: number;
+  slug: string;
 }

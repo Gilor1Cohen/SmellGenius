@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import type { Perfume } from "../../../types/Perfumes.types";
+import type { ShortPerfume } from "../../../types/Perfumes.types";
 import GoldBtn from "../goldBtn/goldBtn";
-import "./PerfumeInformation.css";
 import type { PerfumeInformationProps } from "../../../types/UI.types";
+import PerfumeCard from "../perfumeCard/perfumeCard";
+
+import "./PerfumeInformation.css";
 
 export default function PerfumeInformation({
   data,
@@ -84,46 +85,35 @@ export default function PerfumeInformation({
           Other {data.PerfumeData[0].Brand} Fragrances
         </h3>
         <div className="same-brand-list">
-          {data.SameBrand.map((p: Perfume, idx: number) => (
-            <Link
-              key={p.id ? `${p.id}-${idx}` : `${p.url}-${idx}`}
-              to={`/Perfumes/${p.Perfume.toLowerCase()
-                .trim()
-                .replace(/\s+/g, "-")}`}
-              className="perfume-card-link"
-            >
-              <article className="perfume-card">
-                <div className="perfume-card-content">
-                  <h4 className="perfume-card-name">{p.Perfume}</h4>
-                  <p className="perfume-card-year">
-                    {p.Year || "Year unknown"}
-                  </p>
-                </div>
-              </article>
-            </Link>
-          ))}
+          {data.SameBrand.map((p: ShortPerfume, idx: number) => {
+            if (!p) return null;
+            const slug = p.Perfume.toLowerCase().trim().replace(/\s+/g, "-");
+
+            return (
+              <PerfumeCard
+                key={`${p.Perfume}-${idx}`}
+                p={p}
+                idx={idx}
+                slug={slug}
+              />
+            );
+          })}
         </div>
       </div>
 
       <div className="similar-perfumes-section">
         <h3 className="similar-perfumes-title">Similar Perfumes</h3>
         <div className="similar-perfumes-list">
-          {data.SimilarPerfumes.map((p, idx) => {
+          {data.SimilarPerfumes.map((p: ShortPerfume, idx: number) => {
             if (!p) return null;
             const slug = p.Perfume.toLowerCase().trim().replace(/\s+/g, "-");
             return (
-              <Link
-                key={`${slug}-${idx}`}
-                className="perfume-card"
-                to={`/Perfumes/${slug}`}
-              >
-                <div className="perfume-card-content">
-                  <h4 className="perfume-card-name">{p.Perfume}</h4>
-                  <p className="perfume-card-year">
-                    {p.Year || "Year unknown"}
-                  </p>
-                </div>
-              </Link>
+              <PerfumeCard
+                key={`${p.Perfume}-${idx}`}
+                p={p}
+                idx={idx}
+                slug={slug}
+              />
             );
           })}
         </div>

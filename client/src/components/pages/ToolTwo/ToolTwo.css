@@ -1,0 +1,60 @@
+#ToolTwo {
+  padding: 7.5rem 1rem;
+  background-color: #fcfcfc;
+  color: #333;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#SituationBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#SituationData {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#SituationData > p {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #666;
+}
+
+#Error {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #e74c3c;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+@media (max-width: 800px) {
+  #ToolTwo {
+    padding: 12.5rem 2rem;
+  }
+
+  #SituationBox,
+  #SituationData {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  #SituationData {
+    grid-template-columns: 1fr;
+  }
+}

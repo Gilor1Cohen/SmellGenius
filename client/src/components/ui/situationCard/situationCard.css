@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+.situation-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 200 / 75;
+  min-height: 75px;
+  padding: 1rem;
+  background: #cee4ed;
+  border-radius: 8px;
+  font: 700 1rem "Roboto", sans-serif;
+  color: #2a363f;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.situation-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(160deg, #ffffff 0%, #cfb37b 100%);
+  transform: skewX(-25deg);
+  transition: transform 0.5s ease;
+}
+
+.situation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.situation-card:hover::before {
+  transform: skewX(-25deg) translateX(200%);
+}

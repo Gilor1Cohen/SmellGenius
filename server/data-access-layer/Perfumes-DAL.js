@@ -49,11 +49,14 @@ async function findByAccordsAndNotes(PerfumeData, _id) {
     const value = PerfumeData[field];
     if (!value) continue;
 
-    const results = await Perfumes.find({
-      [field]: value,
-      Gender: PerfumeData.Gender,
-      _id: { $ne: PerfumeData._id },
-    })
+    const results = await Perfumes.find(
+      {
+        [field]: value,
+        Gender: PerfumeData.Gender,
+        _id: { $ne: PerfumeData._id },
+      },
+      { Perfume: 1, Year: 1, Brand: 1, _id: 0 }
+    )
       .limit(10)
       .lean();
 
@@ -67,11 +70,14 @@ async function findByAccordsAndNotes(PerfumeData, _id) {
       .filter((n) => n);
 
     for (const note of notes) {
-      const results = await Perfumes.find({
-        [field]: { $regex: `\\b${note}\\b`, $options: "i" },
-        Gender: PerfumeData.Gender,
-        _id: { $ne: PerfumeData._id },
-      })
+      const results = await Perfumes.find(
+        {
+          [field]: { $regex: `\\b${note}\\b`, $options: "i" },
+          Gender: PerfumeData.Gender,
+          _id: { $ne: PerfumeData._id },
+        },
+        { Perfume: 1, Year: 1, Brand: 1, _id: 0 }
+      )
         .limit(10)
         .lean();
 
