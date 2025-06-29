@@ -7,6 +7,7 @@ const {
   SearchByName,
   GetPerfumeData,
   GetBySituation,
+  GetBuyingRecommendations,
 } = require("../business-logic-layer/Perfumes-BL");
 
 router.get(
@@ -92,6 +93,33 @@ router.get(
     } catch (error) {
       return res
         .status(error.message === "No perfume found." ? 404 : 500)
+        .json({ message: error.message || "Error" });
+    }
+  }
+);
+
+router.get(
+  "/GetBuyingRecommendations",
+  attachTokenFromCookie,
+  verifyToken,
+  async (req, res) => {
+    try {
+      console.log(req.user._id);
+
+      const _id = req.user._id;
+      const Gender = req.user.Gender;
+
+      const data = await GetBuyingRecommendations(_id, Gender);
+
+      return res.status(200).json({ data });
+    } catch (error) {
+      return res
+        .status(
+          error.message === "No perfume found." ||
+            error.message?.includes("No perfume found")
+            ? 404
+            : 500
+        )
         .json({ message: error.message || "Error" });
     }
   }

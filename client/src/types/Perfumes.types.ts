@@ -48,3 +48,24 @@ export interface PerfumeInformationResData {
 export interface PerfumeInformationRes {
   data: PerfumeInformationResData;
 }
+
+export interface BuyingRecommendationsData {
+  Arr1Name: string;
+  Arr1: ShortPerfume[];
+
+  Arr2Name: string;
+  Arr2: ShortPerfume[];
+
+  Arr3Name: string;
+  Arr3: ShortPerfume[];
+}
+
+export interface SmellsGroup {
+  smellsData: ShortPerfume[];
+}
+
+export type DataGroup = BuyingRecommendationsData | SmellsGroup;
+
+export interface BuyingRecommendationsDataRes {
+  data: DataGroup[];
+}

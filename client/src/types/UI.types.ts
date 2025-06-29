@@ -6,7 +6,11 @@ import type {
   Path,
 } from "react-hook-form";
 
-import type { PerfumeInformationResData, ShortPerfume } from "./Perfumes.types";
+import type {
+  BuyingRecommendationsData,
+  PerfumeInformationResData,
+  ShortPerfume,
+} from "./Perfumes.types";
 
 export interface GoldBtnProps {
   text: string;
@@ -66,4 +70,9 @@ export interface PerfumeCardProps {
   p: ShortPerfume;
   idx: number;
   slug: string;
+}
+
+export interface BuyingRecommendationsBoxProps {
+  title: string;
+  data: BuyingRecommendationsData;
 }

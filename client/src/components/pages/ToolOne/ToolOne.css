@@ -1,0 +1,60 @@
+#ToolOne {
+  padding: 6rem 4rem;
+  max-width: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+#ToolOne::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #c8e2ec 0%,
+    #c8e2ec 50%,
+    #cbb177 50%,
+    #cbb177 100%
+  );
+  filter: blur(1rem);
+  z-index: -1;
+}
+
+#ToolOne h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+#ToolOne p {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.bySmellsBox {
+  padding: 1.5rem;
+  background-color: #fafafa;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.bySmellsBox h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.bySmellsBoxData {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: start;
+}

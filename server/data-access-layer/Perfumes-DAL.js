@@ -88,9 +88,62 @@ async function findByAccordsAndNotes(PerfumeData, _id) {
   return data;
 }
 
+async function getPerfumeByCountry(Country, Gender) {
+  const data = await Perfumes.find({
+    Country: Country,
+    Gender: Gender,
+  }).limit(15);
+
+  if (!data) {
+    throw new Error("No perfume found.");
+  }
+
+  return data;
+}
+
+async function getPerfumeBySmells(smells, gender) {
+  const pipeline = [
+    { $match: { Gender: gender } },
+    {
+      $addFields: {
+        _allSmells: [
+          "$Top",
+          "$Middle",
+          "$Base",
+          "$mainaccord1",
+          "$mainaccord2",
+          "$mainaccord3",
+          "$mainaccord4",
+          "$mainaccord5",
+        ],
+      },
+    },
+    {
+      $addFields: {
+        matchedCount: {
+          $size: { $setIntersection: ["$_allSmells", smells] },
+        },
+      },
+    },
+    { $match: { matchedCount: { $gte: 2 } } },
+    { $limit: 15 },
+    { $project: { _allSmells: 0, matchedCount: 0 } },
+  ];
+
+  const results = await Perfumes.aggregate(pipeline);
+  if (!results || results.length === 0) {
+    throw new Error(
+      "No perfume found with at least " + minMatches + " matching smells."
+    );
+  }
+  return results;
+}
+
 module.exports = {
   getLikes,
   getPerfumeByName,
   getPerfumeByBrand,
   findByAccordsAndNotes,
+  getPerfumeByCountry,
+  getPerfumeBySmells,
 };

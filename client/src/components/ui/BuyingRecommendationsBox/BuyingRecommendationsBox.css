@@ -1,0 +1,40 @@
+.RecommendationsBox {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  background-color: #fafafa;
+  border-radius: 0.5rem;
+}
+
+.RecommendationsBox h1 {
+  grid-column: 1 / -1;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.RecommendationsBox .box {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.RecommendationsBox .box h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #555;
+  text-transform: capitalize;
+}
+
+.RecommendationsBox .dataBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+}
