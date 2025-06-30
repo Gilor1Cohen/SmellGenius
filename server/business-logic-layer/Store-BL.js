@@ -3,9 +3,9 @@ const {
   GetItems,
 } = require("../data-access-layer/Store-DAL");
 
-async function GetStoreItems(filter, page) {
+async function GetStoreItems(filter, page, priceLimit) {
   try {
-    let query = {};
+    let query = { priceAfterDiscount: { $lte: priceLimit } };
 
     if (filter && filter !== "All") {
       query.gender = filter;

@@ -7,6 +7,8 @@ import { UserContext } from "../../../contexts/UserContext";
 import "./Shop.css";
 import type { StoreItem, StoreRes } from "../../../types/Store.types";
 import StoreItemCard from "../../ui/StoreItem/StoreItem";
+import { useForm } from "react-hook-form";
+import Input from "../../ui/input/input";
 
 export default function Shop() {
   const [data, setData] = useState<StoreItem[] | null>(null);
@@ -20,15 +22,28 @@ export default function Shop() {
 
   const { setUser, setAuth } = useContext(UserContext);
 
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<{ PriceLimit: string }>({ mode: "all" });
+
+  const priceLimit = watch("PriceLimit");
+
   useEffect(() => {
     async function getItems(): Promise<void> {
+      if (+priceLimit > 900 || +priceLimit < 200) return;
+
       setLoading(true);
+      setData(null);
+      setError(null);
+      setPage(1);
 
       try {
         const res = await axios.get<StoreRes>(
           "http://localhost:5174/Store/GetStoreItems",
           {
-            params: { filter, page },
+            params: { filter, page, priceLimit: priceLimit ? priceLimit : 900 },
             withCredentials: true,
           }
         );
@@ -55,21 +70,39 @@ export default function Shop() {
     }
 
     getItems();
-  }, [filter, page]);
+  }, [filter, page, priceLimit]);
 
   return (
     <section id="Shop">
       <h1>Shop</h1>
-      <article id="btns">
-        {filters.map((f: string) => (
-          <GoldBtn
-            key={f}
-            text={f}
-            type="button"
-            onClick={() => setFilter(f)}
-            isDisabled={loading || filter == f}
+      <article className="filters">
+        <div id="btns">
+          {filters.map((f: string) => (
+            <GoldBtn
+              key={f}
+              text={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              isDisabled={loading || filter == f}
+            />
+          ))}
+        </div>
+
+        <div className="PriceLimit">
+          <label htmlFor="PriceLimit">Price limit:</label>
+          <Input
+            name={"PriceLimit"}
+            register={register}
+            validation={{
+              required: "Price Limit is required",
+              max: { value: 900, message: "Max price is 900" },
+              min: { value: 200, message: "Min price is 200" },
+            }}
+            type="number"
+            defaultValue="900"
+            error={errors.PriceLimit}
           />
-        ))}
+        </div>
       </article>
 
       <article id="dataArea">

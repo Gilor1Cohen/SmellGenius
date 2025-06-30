@@ -13,8 +13,9 @@ router.get(
     try {
       const filter = req.query.filter;
       const page = req.query.page;
+      const priceLimit = req.query.priceLimit;
 
-      const data = await GetStoreItems(filter, page);
+      const data = await GetStoreItems(filter, page, priceLimit);
 
       return res.status(200).json({ data });
     } catch (error) {
