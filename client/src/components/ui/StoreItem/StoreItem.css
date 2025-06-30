@@ -1,0 +1,87 @@
+.store-card {
+  box-sizing: border-box;
+  width: 275px;
+  height: 300px;
+  background: #fff;
+  border-radius: 2rem;
+  border: 2px solid #cbb177;
+  box-shadow: 0 6px 32px 0 rgba(203, 177, 119, 0.09),
+    0 1.5px 10px 0 rgba(24, 24, 24, 0.07);
+  overflow: hidden;
+  transition: transform 0.16s cubic-bezier(0.39, 0.58, 0.57, 1),
+    box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.store-card:hover,
+.store-card:focus-within {
+  transform: translateY(-6px) scale(1.018);
+  box-shadow: 0 12px 36px 0 rgba(203, 177, 119, 0.14),
+    0 2.5px 14px 0 rgba(24, 24, 24, 0.12);
+  border-color: #bfa055;
+}
+
+.store-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.store-card-body {
+  padding: 2.3rem 1.7rem 1.5rem 1.7rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.store-card-title {
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: #181818;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.02em;
+  min-height: 48px;
+  line-height: 1.2;
+}
+
+.store-card-gender {
+  display: inline-block;
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: #cbb177;
+  background: #faf6ee;
+  border-radius: 999px;
+  padding: 0.21em 0.9em;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.store-card-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.7rem;
+  margin-bottom: 2.1rem;
+  min-height: 38px;
+}
+
+.after-discount {
+  color: #4bb543;
+  font-size: 1.32rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.before-discount {
+  color: #d23f3f;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: line-through;
+  opacity: 0.58;
+}

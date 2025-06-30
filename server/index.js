@@ -20,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/Auth", require("./controllers-layer/Auth-Controller"));
 app.use("/Perfumes", require("./controllers-layer/Perfumes-Controller"));
+app.use("/Store", require("./controllers-layer/Store-Controller"));
 
 app.use((req, res) => {
   res.status(404).send(`Route not found: ${req.originalUrl}`);

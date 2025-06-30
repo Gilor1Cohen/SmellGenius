@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { attachTokenFromCookie, verifyToken } = require("../middlewares/Auth");
+
 const {
   GetUserLikes,
   SearchByName,
@@ -104,8 +105,6 @@ router.get(
   verifyToken,
   async (req, res) => {
     try {
-      console.log(req.user._id);
-
       const _id = req.user._id;
       const Gender = req.user.Gender;
 

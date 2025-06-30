@@ -1,0 +1,85 @@
+#Shop {
+  width: 100%;
+  background: #faf9f6;
+  box-shadow: 0 4px 32px rgba(55, 45, 30, 0.08);
+  padding: 7.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+#Shop h1 {
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #a87e4d;
+  text-align: center;
+}
+
+#btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+#dataArea {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dataBox {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  min-height: 250px;
+}
+
+.dataPages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.pagesNums {
+  min-width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6d563a;
+  background: #f3efe5;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(168, 126, 77, 0.09);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  user-select: none;
+}
+
+.pagesNums:hover {
+  background: #e1d3bd;
+  color: #a87e4d;
+}
+
+.pagesNums.active {
+  background: #a87e4d;
+  color: #fff;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  #Shop {
+    padding: 1rem 0.4rem;
+    gap: 1.2rem;
+  }
+  .dataBox {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
